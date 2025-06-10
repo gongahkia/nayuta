@@ -7,10 +7,10 @@ ENV PATH="/opt/venv/bin:$PATH"
 
 RUN apt-get update && apt-get install -y --no-install-recommends gcc python3-dev
 
-COPY requirements.txt .
-RUN pip install --no-cache-dir -r requirements.txt
+COPY . /app/backend
 
-COPY . .
+WORKDIR /app/backend
+RUN pip install --no-cache-dir -r requirements.txt
 
 ENV PYTHONPATH=/app
 
