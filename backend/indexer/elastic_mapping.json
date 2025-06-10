@@ -1,0 +1,27 @@
+{
+  "mappings": {
+    "properties": {
+      "url": {
+        "type": "keyword"
+      },
+      "title": {
+        "type": "text",
+        "fields": {
+          "raw": { "type": "keyword" }
+        },
+        "analyzer": "standard"
+      },
+      "content": {
+        "type": "text",
+        "analyzer": "standard"
+      },
+      "links": {
+        "type": "keyword"
+      },
+      "crawled_at": {
+        "type": "date",
+        "format": "strict_date_optional_time||epoch_millis"
+      }
+    }
+  }
+}
