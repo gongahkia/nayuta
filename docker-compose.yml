@@ -13,3 +13,9 @@ services:
     # for live reload in dev, comment out in prod
     volumes:
       - ./frontend:/app
+
+  backend:
+    build: ./backend
+    command: sh -c "PYTHONPATH=/app uvicorn backend.query_engine.app.main:app --host 0.0.0.0 --port 8000"
+    environment:
+      - PYTHONPATH=/app
