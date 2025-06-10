@@ -39,6 +39,8 @@ $ docker-compose up --build
 
 ## Architecture
 
+See [here](#directory-structure) for a more granular look at the layout of `Nayuta`'s source code.
+
 ### Overview
 
 ```mermaid
@@ -60,7 +62,80 @@ $ docker-compose up --build
 ## Directory structure
 
 ```txt
-
+.
+├── docker-compose.yml
+├── backend
+│   ├── Dockerfile
+│   ├── __init__.py
+│   ├── __pycache__
+│   │   ├── __init__.cpython-310.pyc
+│   │   └── config.cpython-310.pyc
+│   ├── config.py
+│   ├── crawler
+│   │   ├── items.py
+│   │   ├── scrapy.cfg
+│   │   └── spiders
+│   │       └── basic_crawler.py
+│   ├── indexer
+│   │   ├── elastic_mapping.json
+│   │   ├── schema
+│   │   │   └── document_schema.py
+│   │   └── whoosh_index
+│   ├── query_engine
+│   │   ├── __init__.py
+│   │   ├── __pycache__
+│   │   │   └── __init__.cpython-310.pyc
+│   │   └── app
+│   │       ├── __init__.py
+│   │       ├── __pycache__
+│   │       │   ├── __init__.cpython-310.pyc
+│   │       │   ├── main.cpython-310.pyc
+│   │       │   └── ranking.cpython-310.pyc
+│   │       ├── main.py
+│   │       └── ranking.py
+│   └── requirements.txt
+└── frontend
+    ├── Dockerfile
+    ├── package-lock.json
+    ├── package.json
+    ├── public
+    │   ├── favicon.ico
+    │   ├── index.html
+    │   ├── logo192.png
+    │   ├── logo512.png
+    │   ├── manifest.json
+    │   └── robots.txt
+    └── src
+        ├── App.jsx
+        ├── App.test.js
+        ├── api
+        │   └── search.js
+        ├── components
+        │   ├── Footer.jsx
+        │   ├── LanguageSwitcher.jsx
+        │   ├── Loader.jsx
+        │   ├── ResultsList.jsx
+        │   └── SearchBar.jsx
+        ├── i18n.js
+        ├── index.js
+        ├── locales
+        │   ├── en
+        │   │   └── translation.json
+        │   ├── ja
+        │   │   └── translation.json
+        │   ├── ko
+        │   │   └── translation.json
+        │   ├── ms
+        │   │   └── translation.json
+        │   ├── ta
+        │   │   └── translation.json
+        │   └── zh
+        │       └── translation.json
+        ├── logo.svg
+        ├── reportWebVitals.js
+        ├── setupTests.js
+        └── styles
+            └── main.css
 ```
 
 ## Reference
