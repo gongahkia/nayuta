@@ -2,13 +2,14 @@ version: '3.8'
 
 services:
   frontend:
-    build: ./frontend
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
     ports:
       - "3000:80"
-    depends_on:
-      - backend
-
-  backend:
-    build: ./backend/query_engine
-    ports:
-      - "8000:8000"
+    restart: unless-stopped
+    environment:
+      - NODE_ENV=production
+    # for live reload in dev, comment out in prod
+    volumes:
+      - ./frontend:/app
