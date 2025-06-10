@@ -55,7 +55,7 @@ See [here](#directory-structure) for a more granular look at the layout of `Nayu
 
 ```mermaid
 sequenceDiagram
-    participant User
+    Actor User as User
     participant Frontend as React Frontend
     participant API as FastAPI Backend
     participant Ranker as BM25 Ranker
