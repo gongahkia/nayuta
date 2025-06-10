@@ -50,10 +50,81 @@ See [here](#directory-structure) for a more granular look at the layout of `Nayu
 ### [Frontend](./frontend/)
 
 ```mermaid
-
+graph TD
+    A[User] --> B[App.jsx]
+    subgraph React Components
+        B --> C[SearchBar.jsx]
+        B --> D[ResultsList.jsx]
+        B --> E[Loader.jsx]
+        B --> F[Footer.jsx]
+        B --> G[LanguageSwitcher.jsx]
+    end
+    
+    subgraph i18n Internationalization
+        H[locales/] -->|translation.json| I(en,ms,zh,ta,ja,ko)
+        J[i18n.js] --> H
+        G --> J
+    end
+    
+    subgraph API Integration
+        C --> K[search.js]
+        K -->|HTTP| L[FastAPI Backend]
+        D -->|Paginated Results| K
+    end
+    
+    subgraph Styling
+        M[main.css] --> B
+        M --> C
+        M --> D
+        M --> F
+    end
+    
+    style A fill:#f9f,stroke:#333
+    style B fill:#7f7,stroke:#333
+    style C fill:#77f,stroke:#333
+    style D fill:#77f,stroke:#333
+    style J fill:#f77,stroke:#333
+    style K fill:#ff7,stroke:#333
 ```
 
 ### [Backend](./backend/)
+
+```mermaid
+graph TD
+    A[User Request] --> B[FastAPI Server]
+    subgraph Nayuta Backend Architecture
+        B --> C[Query Engine]
+        C --> D[BM25 Ranking]
+        C --> E[Autocomplete]
+        C --> F[WebSocket Handler]
+        
+        D --> G[Whoosh Index]
+        D --> H[Elasticsearch Index]
+        
+        C --> I[Redis Cache]
+        
+        J[Web Crawler] --> K[Scrapy Spider]
+        K --> L[Scheduler]
+        K --> M[Downloader]
+        K --> N[Parser]
+        J --> O[Redis Queue]
+        
+        N --> P[Raw Documents]
+        P --> Q[Indexer]
+        Q --> R[Text Processing]
+        R --> G
+        R --> H
+    end
+    
+    style A fill:#f9f,stroke:#333
+    style B fill:#7f7,stroke:#333
+    style J fill:#77f,stroke:#333
+    style Q fill:#f77,stroke:#333
+    style G fill:#ff7,stroke:#333
+    style H fill:#ff7,stroke:#333
+```
+
+### [Schema](./backend/indexer/schema/)
 
 ```mermaid
 
