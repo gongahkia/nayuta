@@ -12,17 +12,24 @@ const languages = [
 
 export default function LanguageSwitcher() {
   const { i18n } = useTranslation();
+
+  const handleChange = (e) => {
+    i18n.changeLanguage(e.target.value);
+  };
+
   return (
     <div style={{ marginBottom: '1rem', textAlign: 'right' }}>
-      {languages.map(lang =>
-        <button
-          key={lang.code}
-          onClick={() => i18n.changeLanguage(lang.code)}
-          style={{ margin: '0 0.2rem', padding: '0.2rem 0.6rem' }}
-        >
-          {lang.label}
-        </button>
-      )}
+      <select
+        value={i18n.language}
+        onChange={handleChange}
+        style={{ padding: '0.3rem 0.8rem', fontSize: '1rem' }}
+      >
+        {languages.map(lang => (
+          <option key={lang.code} value={lang.code}>
+            {lang.label}
+          </option>
+        ))}
+      </select>
     </div>
   );
 }
