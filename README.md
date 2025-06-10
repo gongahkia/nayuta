@@ -14,8 +14,8 @@
 
 ## Stack
 
-* [*Frontend*](./frontend/): [React](https://react.dev/), [JavaScript](https://developer.mozilla.org/en-US/docs/Web/JavaScript)
-* [*Backend*](./backend/): [Python](https://www.python.org/)
+* *Frontend*: [React](https://react.dev/), [JavaScript](https://developer.mozilla.org/en-US/docs/Web/JavaScript)
+* *Backend*: [Python](https://www.python.org/)
     1. *Web Crawler* : [Scrapy](https://www.scrapy.org/)
     2. *Indexer* : []()
     3. *Query Engine* : []()
@@ -26,7 +26,7 @@
 ...
 
 ```console
-$ 
+$
 ```
 
 ## Directory structure
@@ -36,6 +36,12 @@ $
 ```
 
 ## Architecture
+
+### [Frontend](./frontend/)
+
+...
+
+### [Backend](./backend/)
 
 ...
 
