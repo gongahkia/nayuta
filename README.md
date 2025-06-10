@@ -127,7 +127,35 @@ graph TD
 ### [Schema](./backend/indexer/schema/)
 
 ```mermaid
+classDiagram
+    class Document {
+        +String url
+        +String title
+        +String content
+        +String[] links
+        +DateTime crawled_at
+    }
 
+    class WhooshSchema {
+        <<Schema>>
+        -url: ID(stored, unique)
+        -title: TEXT(stored, analyzer=StemmingAnalyzer)
+        -content: TEXT(stored, analyzer=StemmingAnalyzer)
+        -links: KEYWORD(commas, stored)
+        -crawled_at: DATETIME(stored)
+    }
+
+    class ElasticsearchMapping {
+        <<Mapping>>
+        -url: keyword
+        -title: text
+        -content: text(analyzer=standard)
+        -links: keyword
+        -crawled_at: date(format="strict_date_optional_time||epoch_millis")
+    }
+
+    Document -- WhooshSchema : Indexed in
+    Document -- ElasticsearchMapping : Indexed in
 ```
 
 ## Directory structure
