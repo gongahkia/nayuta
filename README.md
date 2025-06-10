@@ -29,7 +29,7 @@
 > [!IMPORTANT]  
 > Read the [legal disclaimer](#legal-disclaimer) before installing `Nayuta`.
 
-The below instructions are for locally hosting `Nayuta`.
+The below instructions are for locally hosting `Nayuta`. The [Dockerfile](./docker-compose.yml) builds the [Backend](./backend/), then the [Frontend](./frontend/).
 
 ```console
 $ git clone https://github.com/gongahkia/nayuta && cd nayuta
