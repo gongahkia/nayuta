@@ -44,7 +44,62 @@ See [here](#directory-structure) for a more granular look at the layout of `Nayu
 ### Overview
 
 ```mermaid
+sequenceDiagram
+    participant User
+    participant Frontend as React Frontend
+    participant API as FastAPI Backend
+    participant Ranker as BM25 Ranker
+    participant Index as Search Index
+    participant Crawler as Scrapy Crawler
+    participant Queue as Redis Queue
 
+    User->>Frontend: Open app (localhost:3000)
+    Frontend->>API: GET /health
+    API-->>Frontend: Status OK
+    Frontend->>User: Render UI with loading spinner
+
+    par Initialization
+        Frontend->>Frontend: Initialize i18n translations
+        API->>Crawler: Check crawl status
+        Crawler->>Queue: Poll for crawl tasks
+    end
+
+    User->>Frontend: Enter search query "AI trends"
+    Frontend->>API: POST /search?q=AI+trends
+    API->>Ranker: Process BM25 ranking
+    Ranker->>Index: Query inverted index
+    Index-->>Ranker: Return 50 results
+    Ranker->>API: Apply relevance scoring
+    API-->>Frontend: Return top 10 results
+    Frontend->>User: Display results with snippets
+
+    loop Real-time Updates
+        User->>Frontend: Type additional characters
+        Frontend->>API: WS /ws/search (partial query)
+        API->>Ranker: Get partial matches
+        Ranker-->>API: Return live suggestions
+        API-->>Frontend: Stream results
+        Frontend->>User: Update UI instantly
+    end
+
+    User->>Frontend: Click "Next Page"
+    Frontend->>API: GET /search?q=AI+trends&offset=10
+    API-->>Frontend: Return results 11-20
+    Frontend->>User: Update pagination
+
+    User->>Frontend: Switch to Japanese
+    Frontend->>Frontend: i18n.changeLanguage('ja')
+    Frontend->>API: Update Accept-Language header
+    Frontend->>User: Render Japanese UI
+
+    rect rgb(240, 240, 240)
+    Note over Crawler,Queue: Background Processes
+        Crawler->>Queue: Fetch new URLs
+        Queue-->>Crawler: URL batch
+        Crawler->>Crawler: Crawl pages
+        Crawler->>Index: Send parsed documents
+        Index-->>Crawler: Confirm indexing
+    end
 ```
 
 ### [Frontend](./frontend/)
