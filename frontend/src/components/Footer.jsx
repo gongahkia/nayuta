@@ -16,7 +16,7 @@ export default function Footer() {
         Gabriel Ong
       </a>
       .<br/>
-      {t('source_code')} <a href="https://github.com/gongahkia/nayuta" target="_blank" rel="noopener noreferrer" style={{color: '#1a0dab', textDecoration: 'underline'}}>here</a>.
+      {t('source_code')} <a href="https://github.com/gongahkia/nayuta" target="_blank" rel="noopener noreferrer" style={{color: '#1a0dab', textDecoration: 'underline'}}>Repo</a>.
     </footer>
   );
 }
