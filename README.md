@@ -70,7 +70,7 @@ The name `Nayuta` is in reference to [Nayuta](https://chainsaw-man.fandom.com/wi
 Nayuta also roughly translates to [a large number](https://en.wikipedia.org/wiki/Japanese_numerals#Large_numbers) denoting $10^{60}$ or $10^{72}$ in Japanese.
 
 <div align="center">
-    <img src="./asset/logo/nayuta.webp" width="40%">
+    <img src="./asset/logo/nayuta.webp" width="30%">
 </div>
 
 ## Research
