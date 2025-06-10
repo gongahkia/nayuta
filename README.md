@@ -16,14 +16,18 @@
 
 * *Frontend*: [React](https://react.dev/), [JavaScript](https://developer.mozilla.org/en-US/docs/Web/JavaScript)
 * *Backend*: [Python](https://www.python.org/)
-    1. *Web Crawler* : 
-    2. *Indexer* : 
-    3. *Query Engine* : 
+    1. *Web Crawler* : [Scrapy](https://www.scrapy.org/)
+    2. *Indexer* : []()
+    3. *Query Engine* : []()
 * *Package*: [Docker](https://www.docker.com/)
 
 ## Usage
 
 ...
+
+```console
+$ 
+```
 
 ## Directory structure
 
@@ -47,9 +51,11 @@ Nayuta also roughly translates to [a large number](https://en.wikipedia.org/wiki
 
 ## Research
 
-* ...
-* ...
-* ...
+* [*A simple search engine from scratch\**](https://bernsteinbear.com/blog/simple-search/) by Max Bernstein, Chris Gregory
+* [*Search Engines Information Retrieval in Practice*](https://ciir.cs.umass.edu/irbook/) by W.Bruce Croft, Donald Metzler, Trevor Strohman
+* [*Udacity CS101 Resources*](https://www.cs.virginia.edu/~evans/courses/cs101/) by David Evans
+* [*Building a search engine from scratch*](https://www.0x65.dev/blog/2019-12-06/building-a-search-engine-from-scratch.html) by Tech @ Cliqz
+* [*How to build a search engine?*](https://www.reddit.com/r/learnprogramming/comments/qwxgn9/how_to_build_a_search_engine/) by r/learnprogramming
 
 ## Legal disclaimer
 

@@ -1,3 +1,17 @@
+html, body, #root, .app-container {
+  height: 100%;
+}
+.app-container {
+  min-height: 90vh;
+  display: flex;
+  flex-direction: column;
+}
+footer {
+  margin-top: auto;
+}
+body, .app-container {
+  font-family: 'JetBrains Mono', 'Consolas', 'Courier New', monospace;
+}
 .app-container {
   max-width: 800px;
   margin: 2rem auto;

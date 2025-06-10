@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import SearchBar from './components/SearchBar';
 import ResultsList from './components/ResultsList';
 import Loader from './components/Loader';
+import Footer from './components/Footer';
 import { searchAPI } from './api/search';
 import './styles/main.css';
 
@@ -30,6 +31,7 @@ export default function App() {
       <SearchBar onSearch={handleSearch} />
       {error && <div className="error-message">{error}</div>}
       {isLoading ? <Loader /> : <ResultsList results={results} />}
+      <Footer />
     </div>
   );
 }
