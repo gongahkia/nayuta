@@ -29,7 +29,8 @@
 ...
 
 ```console
-$
+$ git clone https://github.com/gongahkia/nayuta && cd nayuta
+$ docker-compose up --build
 ```
 
 ## Architecture
