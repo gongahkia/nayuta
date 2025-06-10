@@ -32,12 +32,6 @@
 $
 ```
 
-## Directory structure
-
-```txt
-
-```
-
 ## Architecture
 
 ### [Frontend](./frontend/)
@@ -47,6 +41,12 @@ $
 ### [Backend](./backend/)
 
 ...
+
+## Directory structure
+
+```txt
+
+```
 
 ## Reference
 
