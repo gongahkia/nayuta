@@ -30,7 +30,8 @@ The below instructions are for locally hosting `Nayuta`.
 
 ```console
 $ git clone https://github.com/gongahkia/nayuta && cd nayuta
-$ docker-compose up --build
+$ docker-compose build 
+$ docker-compose up
 ```
 
 ## Architecture
