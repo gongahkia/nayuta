@@ -2,15 +2,25 @@
 
 # `Nayuta` 🧮
 
-...
+Rudimentary [Search Engine](https://en.wikipedia.org/wiki/Search_engine) written from scratch.
 
-## Rationale
+This includes the [Crawlers, Indexer, Query Engine](#stack) and [Search Engine Client](#dashboard).
 
-...
+Shipped with [multi-language support](#multi-language-support).
 
 ## Screenshot
 
-...
+### Dashboard
+
+![](./asset/reference/1.png)
+
+### [Multi-language Support](./frontend/src/locales/)
+
+![](./asset/reference/2.png)
+
+### Results
+
+![](./asset/reference/3.png)
 
 ## Stack
 
