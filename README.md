@@ -14,11 +14,22 @@
 
 ## Stack
 
-...
+* *Frontend*: [React](https://react.dev/), [JavaScript](https://developer.mozilla.org/en-US/docs/Web/JavaScript)
+* *Backend*: [Python](https://www.python.org/)
+    1. *Web Crawler* : 
+    2. *Indexer* : 
+    3. *Query Engine* : 
+* *Package*: [Docker](https://www.docker.com/)
 
 ## Usage
 
 ...
+
+## Directory structure
+
+```txt
+
+```
 
 ## Architecture
 
