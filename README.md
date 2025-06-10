@@ -16,10 +16,13 @@
 
 * *Frontend*: [React](https://react.dev/), [JavaScript](https://developer.mozilla.org/en-US/docs/Web/JavaScript)
 * *Backend*: [Python](https://www.python.org/)
-    1. *Web Crawler* : [Scrapy](https://www.scrapy.org/)
-    2. *Indexer* : []()
-    3. *Query Engine* : []()
+    1. *Web Crawler* : [Scrapy](https://www.scrapy.org/), [Playwright](https://playwright.dev/)
+    2. *Indexer* : [Whoosh](https://github.com/whoosh-community/whoosh), [Elasticsearch](https://www.elastic.co/elasticsearch)
+    3. *Query Engine* : [FastAPI](https://fastapi.tiangolo.com/)
+    4. *Search Jobs Scheduler*: [Celery](https://docs.celeryq.dev/en/stable/index.html)
 * *Package*: [Docker](https://www.docker.com/)
+* *Cache*: [Redis](https://redis.io/)
+* *Deployment*: [AWS ECS](https://aws.amazon.com/ecs/), [Nginx](https://nginx.org/)
 
 ## Usage
 
@@ -57,6 +60,7 @@ Nayuta also roughly translates to [a large number](https://en.wikipedia.org/wiki
 
 ## Research
 
+* [*Okapi BM25 Algorithm*](https://en.wikipedia.org/wiki/Okapi_BM25) by Wikipedia
 * [*A simple search engine from scratch\**](https://bernsteinbear.com/blog/simple-search/) by Max Bernstein, Chris Gregory
 * [*Search Engines Information Retrieval in Practice*](https://ciir.cs.umass.edu/irbook/) by W.Bruce Croft, Donald Metzler, Trevor Strohman
 * [*Udacity CS101 Resources*](https://www.cs.virginia.edu/~evans/courses/cs101/) by David Evans
