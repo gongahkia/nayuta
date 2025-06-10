@@ -2,7 +2,7 @@ from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from typing import List, Optional
 from pydantic import BaseModel
-from ..config import CORS_ORIGINS 
+from backend.config import config
 from .ranking import BM25Ranker 
 
 app = FastAPI(
