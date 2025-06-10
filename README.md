@@ -26,7 +26,7 @@
 
 ## Usage
 
-...
+The below instructions are for locally hosting `Nayuta`.
 
 ```console
 $ git clone https://github.com/gongahkia/nayuta && cd nayuta
