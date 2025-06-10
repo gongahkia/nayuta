@@ -1,3 +1,5 @@
-FastAPI
-Scrapy
-Whoosh
+fastapi>=0.68.0
+uvicorn>=0.15.0
+whoosh>=2.7.4
+python-multipart>=0.0.5
+websockets>=10.1
