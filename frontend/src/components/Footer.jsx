@@ -1,6 +1,8 @@
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 
 export default function Footer() {
+  const { t } = useTranslation();
   return (
     <footer style={{
       marginTop: '3rem',
@@ -9,12 +11,12 @@ export default function Footer() {
       fontSize: '1rem',
       color: '#888'
     }}>
-      Made with <span style={{color: 'red', fontSize: '1.2em'}}>♥</span> by{' '}
+      {t('made_by', { heart: <span style={{color: 'red', fontSize: '1.2em'}}>♥</span> })}{" "}
       <a href="https://gabrielongzm.com" target="_blank" rel="noopener noreferrer" style={{color: '#006621', textDecoration: 'underline'}}>
         Gabriel Ong
       </a>
       .<br/>
-      Source code <a href="https://github.com/gongahkia/nayuta" target="_blank" rel="noopener noreferrer" style={{color: '#1a0dab', textDecoration: 'underline'}}>here</a>.
+      {t('source_code')} <a href="https://github.com/gongahkia/nayuta" target="_blank" rel="noopener noreferrer" style={{color: '#1a0dab', textDecoration: 'underline'}}>here</a>.
     </footer>
   );
 }
