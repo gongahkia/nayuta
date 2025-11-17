@@ -9,7 +9,7 @@
   width: 28px;
   height: 28px;
   border-radius: 50%;
-  background: #1a0dab;
+  background: #000;
   color: white;
   border: none;
   font-size: 16px;
@@ -19,13 +19,13 @@
   align-items: center;
   justify-content: center;
   transition: all 0.2s;
-  box-shadow: 0 2px 4px rgba(26, 13, 171, 0.3);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
 }
 
 .help-toggle-btn:hover {
-  background: #1508a0;
+  background: #333;
   transform: scale(1.1);
-  box-shadow: 0 4px 8px rgba(26, 13, 171, 0.4);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
 }
 
 .help-modal-overlay {
@@ -78,7 +78,7 @@
 .help-header h2 {
   margin: 0;
   font-size: 24px;
-  color: #1a0dab;
+  color: #000;
 }
 
 .close-btn {
@@ -113,7 +113,7 @@
   font-size: 20px;
   margin: 0 0 16px 0;
   color: #333;
-  border-bottom: 2px solid #1a0dab;
+  border-bottom: 2px solid #000;
   padding-bottom: 8px;
 }
 
@@ -134,7 +134,7 @@
 .operator-card:hover {
   transform: translateY(-2px);
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-  border-color: #1a0dab;
+  border-color: #000;
 }
 
 .operator-header {
@@ -142,7 +142,7 @@
 }
 
 .operator-name {
-  background: #1a0dab;
+  background: #000;
   color: white;
   padding: 4px 12px;
   border-radius: 16px;
@@ -194,7 +194,7 @@
 .example-item {
   background: #fff;
   border: 2px solid #e0e0e0;
-  border-left: 4px solid #1a0dab;
+  border-left: 4px solid #000;
   border-radius: 8px;
   padding: 16px;
 }
@@ -228,17 +228,12 @@
 .tips-list li {
   padding: 12px 16px;
   margin: 8px 0;
-  background: #e3f2fd;
-  border-left: 4px solid #2196F3;
+  background: #e0e0e0;
+  border-left: 4px solid #666;
   border-radius: 4px;
   font-size: 14px;
   color: #555;
   line-height: 1.5;
-}
-
-.tips-list li::before {
-  content: '💡 ';
-  margin-right: 8px;
 }
 
 /* Responsive */
@@ -270,7 +265,7 @@
   }
 
   .help-header h2 {
-    color: #8ab4f8;
+    color: #e0e0e0;
   }
 
   .operator-card,
@@ -280,7 +275,7 @@
   }
 
   .operator-card:hover {
-    border-color: #8ab4f8;
+    border-color: #e0e0e0;
   }
 
   .operator-description,
@@ -290,7 +285,7 @@
   }
 
   .tips-list li {
-    background: #2a3f5f;
-    border-color: #4a8fe7;
+    background: #444;
+    border-color: #888;
   }
 }

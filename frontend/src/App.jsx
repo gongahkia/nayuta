@@ -68,7 +68,7 @@ export default function App() {
         </label>
 
         <button className="graph-button" onClick={() => setShowGraph(true)}>
-          {t('view_graph', { defaultValue: '🕸️ View Graph' })}
+          {t('view_graph', { defaultValue: 'View Graph' })}
         </button>
       </div>
 

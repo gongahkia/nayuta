@@ -50,7 +50,7 @@
 .graph-modal-header h2 {
   margin: 0;
   font-size: 24px;
-  color: #1a0dab;
+  color: #000;
 }
 
 .graph-modal-body {
@@ -76,7 +76,7 @@
   margin: 12px 0 8px 0;
   color: #333;
   font-size: 16px;
-  border-bottom: 2px solid #1a0dab;
+  border-bottom: 2px solid #000;
   padding-bottom: 4px;
 }
 
@@ -132,7 +132,7 @@
 }
 
 .hub-degree {
-  background: #1a0dab;
+  background: #000;
   color: white;
   padding: 2px 8px;
   border-radius: 10px;
@@ -154,8 +154,8 @@
 }
 
 .domain-count {
-  background: #e3f2fd;
-  color: #1976d2;
+  background: #e0e0e0;
+  color: #000;
   padding: 2px 6px;
   border-radius: 8px;
   font-size: 11px;
@@ -171,7 +171,7 @@
 
 .node-details h3 {
   margin: 0 0 12px 0;
-  color: #1a0dab;
+  color: #000;
   font-size: 16px;
 }
 
@@ -196,13 +196,13 @@
   word-break: break-all;
   font-family: monospace;
   font-size: 11px !important;
-  color: #006621 !important;
+  color: #333 !important;
 }
 
 .visit-button {
   width: 100%;
   padding: 10px;
-  background: #1a0dab;
+  background: #000;
   color: white;
   border: none;
   border-radius: 6px;
@@ -213,7 +213,7 @@
 }
 
 .visit-button:hover {
-  background: #1508a0;
+  background: #333;
 }
 
 .graph-canvas-container {
@@ -242,9 +242,9 @@
 }
 
 .graph-controls button:hover {
-  background: #1a0dab;
+  background: #000;
   color: white;
-  border-color: #1a0dab;
+  border-color: #000;
 }
 
 .graph-canvas {
@@ -309,7 +309,7 @@
   }
 
   .graph-modal-header h2 {
-    color: #8ab4f8;
+    color: #e0e0e0;
   }
 
   .graph-sidebar {
@@ -321,7 +321,7 @@
   .stats-panel h4,
   .node-details h3 {
     color: #e0e0e0;
-    border-color: #8ab4f8;
+    border-color: #e0e0e0;
   }
 
   .stat-item {

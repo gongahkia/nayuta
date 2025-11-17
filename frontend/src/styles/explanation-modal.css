@@ -52,7 +52,7 @@
 .modal-header h2 {
   margin: 0;
   font-size: 24px;
-  color: #1a0dab;
+  color: #000;
 }
 
 .close-button {
@@ -87,7 +87,7 @@
   font-size: 18px;
   margin: 0 0 16px 0;
   color: #333;
-  border-bottom: 2px solid #1a0dab;
+  border-bottom: 2px solid #000;
   padding-bottom: 8px;
 }
 
@@ -101,7 +101,7 @@
 .score-display {
   font-size: 48px;
   font-weight: bold;
-  color: #1a0dab;
+  color: #000;
   text-align: center;
   padding: 16px;
   background: #f8f9fa;
@@ -238,11 +238,11 @@
 }
 
 .title-segment {
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background: #666;
 }
 
 .content-segment {
-  background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+  background: #888;
 }
 
 /* Stats Grid */
@@ -256,7 +256,7 @@
   background: #f8f9fa;
   padding: 16px;
   border-radius: 8px;
-  border-left: 4px solid #1a0dab;
+  border-left: 4px solid #000;
 }
 
 .stat-item .stat-label {
@@ -306,7 +306,7 @@
 }
 
 .formula-components strong {
-  color: #1a0dab;
+  color: #000;
   font-family: monospace;
   background: #f0f0f0;
   padding: 2px 6px;
@@ -316,8 +316,8 @@
 .formula-explanation {
   margin-top: 12px;
   padding: 12px;
-  background: #e3f2fd;
-  border-left: 4px solid #2196F3;
+  background: #e0e0e0;
+  border-left: 4px solid #666;
   border-radius: 4px;
   font-style: italic;
   color: #555;
@@ -336,7 +336,7 @@
 
 .close-btn {
   padding: 10px 24px;
-  background: #1a0dab;
+  background: #000;
   color: white;
   border: none;
   border-radius: 6px;
@@ -347,7 +347,7 @@
 }
 
 .close-btn:hover {
-  background: #1508a0;
+  background: #333;
 }
 
 /* Dark mode support */
@@ -364,17 +364,17 @@
   }
 
   .modal-header h2 {
-    color: #8ab4f8;
+    color: #e0e0e0;
   }
 
   .modal-body h3 {
     color: #e0e0e0;
-    border-color: #8ab4f8;
+    border-color: #e0e0e0;
   }
 
   .score-display {
     background: #2a2a2a;
-    color: #8ab4f8;
+    color: #e0e0e0;
   }
 
   .term-card {
@@ -384,7 +384,7 @@
 
   .stat-item {
     background: #2a2a2a;
-    border-color: #8ab4f8;
+    border-color: #e0e0e0;
   }
 }
 

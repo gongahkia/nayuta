@@ -45,18 +45,18 @@
 }
 
 .stats-btn {
-  background: #e3f2fd;
-  color: #1976d2;
+  background: #d0d0d0;
+  color: #000;
 }
 
 .export-btn {
-  background: #f3e5f5;
-  color: #7b1fa2;
+  background: #e0e0e0;
+  color: #000;
 }
 
 .clear-btn {
-  background: #ffebee;
-  color: #d32f2f;
+  background: #b0b0b0;
+  color: #fff;
 }
 
 .stats-btn:hover,
@@ -70,7 +70,7 @@
   display: flex;
   gap: 16px;
   padding: 16px;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background: #666;
   color: white;
   border-bottom: 1px solid #e0e0e0;
 }
@@ -117,7 +117,7 @@
 
 .history-item:hover {
   background: #f8f9fa;
-  border-color: #1a0dab;
+  border-color: #000;
 }
 
 .history-query {
@@ -126,7 +126,7 @@
   align-items: center;
   gap: 8px;
   font-size: 15px;
-  color: #1a0dab;
+  color: #000;
   margin-bottom: 6px;
 }
 
@@ -152,15 +152,15 @@
 
 .history-results,
 .history-clicks {
-  background: #e3f2fd;
+  background: #e0e0e0;
   padding: 2px 8px;
   border-radius: 10px;
-  color: #1976d2;
+  color: #000;
 }
 
 .history-clicks {
-  background: #f3e5f5;
-  color: #7b1fa2;
+  background: #d0d0d0;
+  color: #000;
 }
 
 .delete-btn {
@@ -182,8 +182,8 @@
 }
 
 .delete-btn:hover {
-  background: #ffebee;
-  color: #d32f2f;
+  background: #e0e0e0;
+  color: #000;
 }
 
 .empty-history {
