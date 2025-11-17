@@ -12,6 +12,12 @@ footer {
 body, .app-container {
   font-family: 'JetBrains Mono', 'Consolas', 'Courier New', monospace;
 }
+
+/* Apply monospace font to all form elements */
+input, button, select, textarea {
+  font-family: 'JetBrains Mono', 'Consolas', 'Courier New', monospace;
+}
+
 .app-container {
   max-width: 800px;
   margin: 2rem auto;
