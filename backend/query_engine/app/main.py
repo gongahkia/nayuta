@@ -6,7 +6,7 @@ from pathlib import Path
 backend_path = Path(__file__).parent.parent.parent
 sys.path.insert(0, str(backend_path))
 
-from fastapi import FastAPI, HTTPException
+from fastapi import FastAPI, HTTPException, WebSocket, WebSocketDisconnect
 from fastapi.middleware.cors import CORSMiddleware
 from typing import List, Optional, Dict, Any
 from pydantic import BaseModel
@@ -39,8 +39,11 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
+# Construct absolute path to index
+INDEX_PATH = Path(__file__).parent.parent.parent / "indexer" / "whoosh_index"
+
 try:
-    ranker = BM25Ranker(index_path="../indexer/whoosh_index")
+    ranker = BM25Ranker(index_path=str(INDEX_PATH))
     graph_service = CrawlGraphService(ranker.index)
 except Exception as e:
     raise RuntimeError(f"Failed to initialize services: {str(e)}")
