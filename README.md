@@ -3,25 +3,18 @@
 
 # `Nayuta` 🧮
 
-Rudimentary [Search Engine](https://en.wikipedia.org/wiki/Search_engine) written from scratch.
+A [Search Engine](https://en.wikipedia.org/wiki/Search_engine) written from scratch.
 
-This includes the [Crawlers, Indexer, Query Engine](#stack) and [Search Engine Client](#dashboard).
+This includes the [Crawlers, Indexer, Query Engine](#screenshot), [Search Engine Client](#screenshot) and [Crawl Graph](#screenshot).
 
-Shipped with [multi-language support](#multi-language-support).
+Ships with first-class [multi-language support](#multi-language-support).
 
 ## Screenshot
 
-### Dashboard
-
-![](./asset/reference/1.png)
-
-### [Multi-language Support](./frontend/src/locales/)
-
-![](./asset/reference/2.png)
-
-### Results
-
-![](./asset/reference/3.png)
+![](./asset/reference/v2/1.png)
+![](./asset/reference/v2/2.png)
+![](./asset/reference/v2/3.png)
+![](./asset/reference/v2/4.png)
 
 ## Stack
 
