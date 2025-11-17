@@ -25,9 +25,6 @@ export default function SearchBar({ onSearch }) {
           onChange={(e) => setQuery(e.target.value)}
           className="search-input"
         />
-        <div className="search-help-btn">
-          <SearchHelp />
-        </div>
       </div>
     </div>
   );
