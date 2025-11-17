@@ -4,6 +4,7 @@ from whoosh.qparser import MultifieldParser, FuzzyTermPlugin, PrefixPlugin
 from whoosh.highlight import ContextFragmenter, HtmlFormatter
 from whoosh.scoring import BM25F
 from whoosh import sorting
+from .explainer import SearchExplainer
 
 class BM25Ranker:
     def __init__(self, index_path):
@@ -11,6 +12,7 @@ class BM25Ranker:
         self.index = self._open_index()
         self.searcher = self.index.searcher(weighting=BM25F)
         self.query_parser = MultifieldParser(["title", "content"], schema=self.index.schema)
+        self.explainer = SearchExplainer(self.searcher, self.index)
         self._setup_autocomplete()
 
     def _open_index(self):
@@ -22,7 +24,7 @@ class BM25Ranker:
         self.query_parser.add_plugin(PrefixPlugin())
         self.query_parser.add_plugin(FuzzyTermPlugin())
 
-    def query(self, query_str, limit=10, offset=0):
+    def query(self, query_str, limit=10, offset=0, explain=False):
         parsed_query = self.query_parser.parse(query_str)
         results = self.searcher.search(
             parsed_query,
@@ -32,20 +34,42 @@ class BM25Ranker:
             scored=True,
             sortedby=sorting.ScoreFacet()
         )
-        
-        return self._format_results(results)
 
-    def _format_results(self, results):
+        # Extract query terms for explanation
+        query_terms = self._extract_query_terms(query_str)
+
+        return self._format_results(results, query_terms, explain)
+
+    def _format_results(self, results, query_terms, explain=False):
         formatted = []
-        for hit in results:
+        for position, hit in enumerate(results, 1):
             snippet = hit.highlights("content", top=1)
-            formatted.append({
+            result_data = {
                 "url": hit["url"],
                 "title": hit.get("title", ""),
                 "snippet": snippet if snippet else self._generate_snippet(hit["content"]),
                 "score": hit.score
-            })
+            }
+
+            # Add explanation if requested
+            if explain:
+                result_data["explanation"] = self.explainer.explain_result(
+                    hit, query_terms, position
+                )
+
+            formatted.append(result_data)
         return formatted
+
+    def _extract_query_terms(self, query_str):
+        """Extract individual terms from query string"""
+        # Simple tokenization - split on whitespace and remove special chars
+        terms = query_str.lower().split()
+        # Remove common operators and punctuation
+        cleaned_terms = [
+            term.strip('*"()[]{}') for term in terms
+            if term not in ['and', 'or', 'not', 'to']
+        ]
+        return [t for t in cleaned_terms if len(t) > 0]
 
     def _generate_snippet(self, content, max_length=150):
         if not content:

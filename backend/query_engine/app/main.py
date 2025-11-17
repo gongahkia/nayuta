@@ -42,21 +42,23 @@ class SearchResponse(BaseModel):
 async def search(
     q: str,
     limit: int = 10,
-    offset: int = 0
+    offset: int = 0,
+    explain: bool = False
 ):
-    """Main search endpoint"""
+    """Main search endpoint with optional result explanation"""
     try:
         start_time = time.perf_counter()
-        results = ranker.query(q, limit=limit, offset=offset)
+        results = ranker.query(q, limit=limit, offset=offset, explain=explain)
         elapsed = time.perf_counter() - start_time
-        
+
         return {
             "results": [
                 {
                     "url": res["url"],
                     "title": res.get("title", ""),
                     "snippet": res.get("snippet", ""),
-                    "score": res.score
+                    "score": res.get("score", 0.0),
+                    "explanation": res.get("explanation")
                 } for res in results
             ],
             "query_time": elapsed,
