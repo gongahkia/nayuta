@@ -7,6 +7,7 @@ import Footer from './components/Footer';
 import LanguageSwitcher from './components/LanguageSwitcher';
 import GraphVisualization from './components/GraphVisualization';
 import SearchHistory from './components/SearchHistory';
+import WelcomeBanner from './components/WelcomeBanner';
 import { searchAPI } from './api/search';
 import { historyService } from './services/historyService';
 import './styles/main.css';
@@ -99,7 +100,10 @@ export default function App() {
       {error && <div className="error-message">{error}</div>}
 
       {!isLoading && results.length === 0 && !currentQuery && (
-        <SearchHistory onSelectQuery={handleSelectFromHistory} />
+        <>
+          <WelcomeBanner />
+          <SearchHistory onSelectQuery={handleSelectFromHistory} />
+        </>
       )}
 
       {isLoading ? <Loader /> : <ResultsList results={results} query={currentQuery} />}
