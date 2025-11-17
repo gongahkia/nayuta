@@ -3,6 +3,7 @@
 .search-help-container {
   position: relative;
   display: inline-block;
+  font-family: 'JetBrains Mono', 'Consolas', 'Courier New', monospace;
 }
 
 .help-toggle-btn {

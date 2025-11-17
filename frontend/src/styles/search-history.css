@@ -7,6 +7,7 @@
   background: white;
   max-height: 400px;
   overflow-y: auto;
+  font-family: 'JetBrains Mono', 'Consolas', 'Courier New', monospace;
 }
 
 .history-header {
@@ -42,6 +43,7 @@
   border-radius: 4px;
   cursor: pointer;
   transition: all 0.2s;
+  font-family: 'JetBrains Mono', 'Consolas', 'Courier New', monospace;
 }
 
 .stats-btn {
@@ -101,6 +103,7 @@
   border: 1px solid #ddd;
   border-radius: 4px;
   font-size: 14px;
+  font-family: 'JetBrains Mono', 'Consolas', 'Courier New', monospace;
 }
 
 .history-list {

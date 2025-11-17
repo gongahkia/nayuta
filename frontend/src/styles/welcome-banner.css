@@ -7,6 +7,7 @@
   border: 1px solid #e0e0e0;
   border-radius: 12px;
   animation: fadeIn 0.5s ease-in;
+  font-family: 'JetBrains Mono', 'Consolas', 'Courier New', monospace;
 }
 
 @keyframes fadeIn {
