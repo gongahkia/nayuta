@@ -6,7 +6,9 @@ import Loader from './components/Loader';
 import Footer from './components/Footer';
 import LanguageSwitcher from './components/LanguageSwitcher';
 import GraphVisualization from './components/GraphVisualization';
+import SearchHistory from './components/SearchHistory';
 import { searchAPI } from './api/search';
+import { historyService } from './services/historyService';
 import './styles/main.css';
 
 export default function App() {
@@ -28,11 +30,18 @@ export default function App() {
       const data = await searchAPI.query(query, explainEnabled);
       setResults(data.results || []);
       setParsedQuery(data.parsed_query);
+
+      // Save to history
+      historyService.addSearch(query, data.total_hits || data.results?.length || 0);
     } catch (err) {
       setError(t('failed_to_fetch_results', { defaultValue: 'Failed to fetch results' }));
     } finally {
       setIsLoading(false);
     }
+  };
+
+  const handleSelectFromHistory = (query) => {
+    handleSearch(query);
   };
 
   const toggleExplanation = () => {
@@ -88,6 +97,11 @@ export default function App() {
       )}
 
       {error && <div className="error-message">{error}</div>}
+
+      {!isLoading && results.length === 0 && !currentQuery && (
+        <SearchHistory onSelectQuery={handleSelectFromHistory} />
+      )}
+
       {isLoading ? <Loader /> : <ResultsList results={results} query={currentQuery} />}
       <Footer />
 

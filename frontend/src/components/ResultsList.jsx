@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import ExplanationModal from './ExplanationModal';
+import { historyService } from '../services/historyService';
 
 export default function ResultsList({ results, query }) {
   const { t } = useTranslation();
@@ -13,6 +14,13 @@ export default function ResultsList({ results, query }) {
     });
   };
 
+  const handleResultClick = (url) => {
+    // Track click in history
+    if (query) {
+      historyService.addClick(query, url);
+    }
+  };
+
   const closeModal = () => {
     setSelectedExplanation(null);
   };
@@ -23,7 +31,15 @@ export default function ResultsList({ results, query }) {
         {results.map((result, index) => (
           <div key={index} className="result-item">
             <div className="result-header">
-              <a href={result.url} className="result-url">{result.url}</a>
+              <a
+                href={result.url}
+                className="result-url"
+                onClick={() => handleResultClick(result.url)}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                {result.url}
+              </a>
               {result.explanation && (
                 <button
                   className="explain-button"
