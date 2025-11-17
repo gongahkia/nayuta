@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
+import SearchHelp from './SearchHelp';
 
 export default function SearchBar({ onSearch }) {
   const [query, setQuery] = useState('');
@@ -16,12 +17,18 @@ export default function SearchBar({ onSearch }) {
 
   return (
     <div className="search-container">
-      <input
-        type="text"
-        placeholder={t('search_placeholder')}
-        value={query}
-        onChange={(e) => setQuery(e.target.value)}
-      />
+      <div className="search-input-wrapper">
+        <input
+          type="text"
+          placeholder={t('search_placeholder')}
+          value={query}
+          onChange={(e) => setQuery(e.target.value)}
+          className="search-input"
+        />
+        <div className="search-help-btn">
+          <SearchHelp />
+        </div>
+      </div>
     </div>
   );
 }

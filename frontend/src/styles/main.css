@@ -18,12 +18,25 @@ body, .app-container {
   padding: 20px;
 }
 
-.search-container input {
+.search-input-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.search-input {
   width: 100%;
-  padding: 12px;
+  padding: 12px 50px 12px 12px;
   font-size: 1.1rem;
   border: 2px solid #ddd;
   border-radius: 24px;
+}
+
+.search-help-btn {
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
 }
 
 .search-options {
