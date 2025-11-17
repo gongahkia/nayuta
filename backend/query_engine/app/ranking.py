@@ -5,6 +5,7 @@ from whoosh.highlight import ContextFragmenter, HtmlFormatter
 from whoosh.scoring import BM25F
 from whoosh import sorting
 from .explainer import SearchExplainer
+from .advanced_parser import AdvancedQueryParser
 
 class BM25Ranker:
     def __init__(self, index_path):
@@ -12,6 +13,7 @@ class BM25Ranker:
         self.index = self._open_index()
         self.searcher = self.index.searcher(weighting=BM25F)
         self.query_parser = MultifieldParser(["title", "content"], schema=self.index.schema)
+        self.advanced_parser = AdvancedQueryParser(self.index.schema)
         self.explainer = SearchExplainer(self.searcher, self.index)
         self._setup_autocomplete()
 
@@ -24,8 +26,18 @@ class BM25Ranker:
         self.query_parser.add_plugin(PrefixPlugin())
         self.query_parser.add_plugin(FuzzyTermPlugin())
 
-    def query(self, query_str, limit=10, offset=0, explain=False):
-        parsed_query = self.query_parser.parse(query_str)
+    def query(self, query_str, limit=10, offset=0, explain=False, use_advanced=True):
+        # Check if query contains advanced operators
+        has_operators = any(op in query_str.lower() for op in ['site:', 'filetype:', 'intitle:', 'inurl:', 'daterange:', '"', '-'])
+
+        if use_advanced and has_operators:
+            # Use advanced parser
+            parsed_dict, parsed_query = self.advanced_parser.parse_and_build(query_str)
+        else:
+            # Use simple parser
+            parsed_query = self.query_parser.parse(query_str)
+            parsed_dict = None
+
         results = self.searcher.search(
             parsed_query,
             limit=limit,
@@ -38,7 +50,7 @@ class BM25Ranker:
         # Extract query terms for explanation
         query_terms = self._extract_query_terms(query_str)
 
-        return self._format_results(results, query_terms, explain)
+        return self._format_results(results, query_terms, explain), parsed_dict
 
     def _format_results(self, results, query_terms, explain=False):
         formatted = []

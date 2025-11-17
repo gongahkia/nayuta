@@ -50,7 +50,7 @@ async def search(
     """Main search endpoint with optional result explanation"""
     try:
         start_time = time.perf_counter()
-        results = ranker.query(q, limit=limit, offset=offset, explain=explain)
+        results, parsed_query = ranker.query(q, limit=limit, offset=offset, explain=explain)
         elapsed = time.perf_counter() - start_time
 
         return {
@@ -64,7 +64,8 @@ async def search(
                 } for res in results
             ],
             "query_time": elapsed,
-            "total_hits": len(results)
+            "total_hits": len(results),
+            "parsed_query": parsed_query
         }
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
