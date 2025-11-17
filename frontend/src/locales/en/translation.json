@@ -1,5 +1,11 @@
 {
   "search_placeholder": "Search Nayuta...",
   "made_by": "Made with ❤️ by",
-  "source_code": "Source code here."
+  "source_code": "Source code here.",
+  "show_explanations": "Show result explanations",
+  "view_graph": "View Graph",
+  "search_history": "Search History",
+  "no_history": "No search history yet",
+  "query_parsed": "Query interpreted as",
+  "failed_to_fetch_results": "Failed to fetch results"
 }

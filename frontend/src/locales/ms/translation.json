@@ -1,5 +1,11 @@
 {
   "search_placeholder": "Cari Nayuta...",
   "made_by": "Dibuat dengan ❤️ oleh",
-  "source_code": "Kod sumber di sini."
+  "source_code": "Kod sumber di sini.",
+  "show_explanations": "Tunjukkan penjelasan hasil",
+  "view_graph": "Lihat Graf",
+  "search_history": "Sejarah Carian",
+  "no_history": "Tiada sejarah carian lagi",
+  "query_parsed": "Pertanyaan ditafsirkan sebagai",
+  "failed_to_fetch_results": "Gagal mendapatkan hasil"
 }

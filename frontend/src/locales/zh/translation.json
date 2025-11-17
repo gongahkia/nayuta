@@ -1,5 +1,11 @@
 {
   "search_placeholder": "搜索 Nayuta...",
   "made_by": "由❤️制作，作者是",
-  "source_code": "源代码在这里。"
+  "source_code": "源代码在这里。",
+  "show_explanations": "显示结果说明",
+  "view_graph": "查看图表",
+  "search_history": "搜索历史",
+  "no_history": "尚无搜索历史",
+  "query_parsed": "查询解析为",
+  "failed_to_fetch_results": "获取结果失败"
 }

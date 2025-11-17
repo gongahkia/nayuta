@@ -1,5 +1,11 @@
 {
   "search_placeholder": "Nayuta 검색...",
   "made_by": "❤️ 로 만든, 제작자",
-  "source_code": "소스 코드는 여기 있습니다."
+  "source_code": "소스 코드는 여기 있습니다.",
+  "show_explanations": "결과 설명 표시",
+  "view_graph": "그래프 보기",
+  "search_history": "검색 기록",
+  "no_history": "검색 기록이 아직 없습니다",
+  "query_parsed": "쿼리 해석",
+  "failed_to_fetch_results": "결과를 가져오는 데 실패했습니다"
 }

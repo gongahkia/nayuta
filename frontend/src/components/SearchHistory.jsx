@@ -114,7 +114,6 @@ export default function SearchHistory({ onSelectQuery }) {
                 className="history-query"
                 onClick={() => onSelectQuery(item.query)}
               >
-                <span className="query-icon">🔍</span>
                 <span className="query-text">{item.query}</span>
               </div>
               <div className="history-meta">
