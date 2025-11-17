@@ -40,12 +40,14 @@ class BM25Ranker:
 
         results = self.searcher.search(
             parsed_query,
-            limit=limit,
-            offset=offset,
+            limit=limit + offset,  # Get more results to handle offset
             terms=True,
             scored=True,
             sortedby=sorting.ScoreFacet()
         )
+
+        # Manually handle offset by slicing results
+        results = results[offset:offset + limit] if offset > 0 else results[:limit]
 
         # Extract query terms for explanation
         query_terms = self._extract_query_terms(query_str)
