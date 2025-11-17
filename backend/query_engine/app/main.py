@@ -53,11 +53,13 @@ class SearchResult(BaseModel):
     title: str
     snippet: str
     score: float
+    explanation: Optional[Dict[str, Any]] = None
 
 class SearchResponse(BaseModel):
     results: List[SearchResult]
     query_time: float
     total_hits: int
+    parsed_query: Optional[Dict[str, Any]] = None
 
 @app.get("/search", response_model=SearchResponse, tags=["Search"])
 async def search(
