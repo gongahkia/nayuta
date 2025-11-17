@@ -200,7 +200,7 @@ print(f"✓ Created test index with {len(sample_docs)} documents in {index_dir}"
 INDEXEOF
 
     cd "$BACKEND_DIR/indexer"
-    python build_test_index.py
+    ../venv/bin/python build_test_index.py
     cd "$BACKEND_DIR"
 
     print_success "Test index created with sample documents"
@@ -238,8 +238,7 @@ trap cleanup INT TERM
 # Start backend
 print_info "Starting backend server on http://localhost:8000..."
 cd "$BACKEND_DIR"
-source venv/bin/activate
-python -m uvicorn query_engine.app.main:app --reload --host 0.0.0.0 --port 8000 > /tmp/nayuta-backend.log 2>&1 &
+./venv/bin/python -m uvicorn query_engine.app.main:app --reload --host 0.0.0.0 --port 8000 > /tmp/nayuta-backend.log 2>&1 &
 BACKEND_PID=$!
 
 # Wait for backend to start
