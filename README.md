@@ -18,25 +18,51 @@ Ships with first-class [multi-language support](#multi-language-support).
 
 ## Stack
 
-* *Frontend*: [React](https://react.dev/), [JavaScript](https://developer.mozilla.org/en-US/docs/Web/JavaScript)
+* *Frontend*: [React](https://react.dev/), [JavaScript](https://developer.mozilla.org/en-US/docs/Web/JavaScript), [i18next](https://www.i18next.com/)
 * *Backend*: [Python](https://www.python.org/)
-    1. *Web Crawler* : [Scrapy](https://www.scrapy.org/), [Playwright](https://playwright.dev/)
-    2. *Indexer* : [Whoosh](https://github.com/whoosh-community/whoosh), [Elasticsearch](https://www.elastic.co/elasticsearch)
-    3. *Query Engine* : [FastAPI](https://fastapi.tiangolo.com/)
-    4. *Search Jobs Scheduler*: [Celery](https://docs.celeryq.dev/en/stable/index.html)
-* *Package*: [Docker](https://www.docker.com/)
-* *Cache*: [Redis](https://redis.io/)
-* *Deployment*: [AWS ECS](https://aws.amazon.com/ecs/), [Nginx](https://nginx.org/)
+    1. *Web Crawler*: [Requests](https://requests.readthedocs.io/), [BeautifulSoup4](https://www.crummy.com/software/BeautifulSoup/), [lxml](https://lxml.de/)
+    2. *Indexer*: [Whoosh](https://github.com/whoosh-community/whoosh)
+    3. *Query Engine*: [FastAPI](https://fastapi.tiangolo.com/), [Uvicorn](https://www.uvicorn.org/)
+    4. *Ranking Algorithm*: [BM25F](https://en.wikipedia.org/wiki/Okapi_BM25)
+* *Development*: [Docker](https://www.docker.com/) (optional)
 
 ## Usage
 
 > [!IMPORTANT]  
 > Read the [legal disclaimer](#legal-disclaimer) before installing `Nayuta`.
 
-The below instructions are for locally hosting `Nayuta`. The [Dockerfile](./docker-compose.yml) builds the [Backend](./backend/), then the [Frontend](./frontend/).
+### Quick Start (Recommended)
+
+The easiest way to run `Nayuta` locally:
 
 ```console
 $ git clone https://github.com/gongahkia/nayuta && cd nayuta
+$ ./dev.sh
+```
+
+This will:
+1. Set up a Python virtual environment
+2. Install all backend dependencies
+3. Create a search index with test data
+4. Start the backend server on http://localhost:8000
+5. Start the frontend on http://localhost:3000
+
+### Crawling Real Websites
+
+To index real web content instead of test data:
+
+```console
+$ cd backend/crawler
+$ ../venv/bin/python crawl_and_index.py --urls https://example.com --max-pages 100
+```
+
+See [backend/crawler/README.md](./backend/crawler/README.md) for more crawling options.
+
+### Docker (Optional)
+
+Alternatively, use Docker to build and run both services:
+
+```console
 $ docker-compose down -v
 $ docker-compose up --build
 ```
@@ -151,26 +177,24 @@ graph TD
     A[User Request] --> B[FastAPI Server]
     subgraph Nayuta Backend Architecture
         B --> C[Query Engine]
-        C --> D[BM25 Ranking]
-        C --> E[Autocomplete]
+        C --> D[BM25F Ranking]
+        C --> E[Advanced Query Parser]
         C --> F[WebSocket Handler]
         
         D --> G[Whoosh Index]
-        D --> H[Elasticsearch Index]
         
-        C --> I[Redis Cache]
-        
-        J[Web Crawler] --> K[Scrapy Spider]
-        K --> L[Scheduler]
-        K --> M[Downloader]
-        K --> N[Parser]
-        J --> O[Redis Queue]
+        J[Web Crawler] --> K[SimpleCrawler]
+        K --> L[fetch_page]
+        K --> M[extract_content]
+        K --> N[crawl]
         
         N --> P[Raw Documents]
         P --> Q[Indexer]
         Q --> R[Text Processing]
         R --> G
-        R --> H
+        
+        C --> S[Search Operators]
+        S --> T["site:, intitle:, inurl:"]
     end
     
     style A fill:#f9f,stroke:#333
@@ -178,7 +202,6 @@ graph TD
     style J fill:#77f,stroke:#333
     style Q fill:#f77,stroke:#333
     style G fill:#ff7,stroke:#333
-    style H fill:#ff7,stroke:#333
 ```
 
 ### [Schema](./backend/indexer/schema/)
@@ -196,23 +219,13 @@ classDiagram
     class WhooshSchema {
         <<Schema>>
         -url: ID(stored, unique)
-        -title: TEXT(stored, analyzer=StemmingAnalyzer)
-        -content: TEXT(stored, analyzer=StemmingAnalyzer)
+        -title: TEXT(stored, field_boost=2.0)
+        -content: TEXT(stored, field_boost=1.0)
         -links: KEYWORD(commas, stored)
         -crawled_at: DATETIME(stored)
     }
 
-    class ElasticsearchMapping {
-        <<Mapping>>
-        -url: keyword
-        -title: text
-        -content: text(analyzer=standard)
-        -links: keyword
-        -crawled_at: date(format="strict_date_optional_time||epoch_millis")
-    }
-
     Document -- WhooshSchema : Indexed in
-    Document -- ElasticsearchMapping : Indexed in
 ```
 
 ## Reference
