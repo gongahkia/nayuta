@@ -215,7 +215,7 @@ cd "$FRONTEND_DIR"
 
 if [ ! -d "node_modules" ]; then
     print_info "Installing Node.js dependencies (this may take a minute)..."
-    npm install
+    npm install --legacy-peer-deps
     print_success "Frontend dependencies installed"
 else
     print_success "Frontend dependencies already installed"
