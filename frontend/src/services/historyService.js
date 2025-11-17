@@ -85,7 +85,7 @@ export const historyService = {
       return filtered;
     } catch (error) {
       console.error('Failed to delete entry:', error);
-      return history;
+      return currentHistory;
     }
   },
 

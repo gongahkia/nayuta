@@ -1,11 +1,27 @@
 import time
+import sys
+from pathlib import Path
+
+# Add backend to path for imports
+backend_path = Path(__file__).parent.parent.parent
+sys.path.insert(0, str(backend_path))
+
 from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from typing import List, Optional, Dict, Any
 from pydantic import BaseModel
-from backend.config import config
+
+try:
+    from config import config
+except ImportError:
+    from backend.config import config
+
 from .ranking import BM25Ranker
-from backend.services.graph_service import CrawlGraphService 
+
+try:
+    from services.graph_service import CrawlGraphService
+except ImportError:
+    from backend.services.graph_service import CrawlGraphService 
 
 app = FastAPI(
     title="Nayuta Query Engine",
