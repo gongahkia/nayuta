@@ -6,11 +6,13 @@ export default function GraphVisualization({ onClose }) {
   const { t } = useTranslation();
   const [graphData, setGraphData] = useState({ nodes: [], edges: [] });
   const [stats, setStats] = useState(null);
+  const [pagerank, setPagerank] = useState({});
   const [isLoading, setIsLoading] = useState(true);
   const [selectedNode, setSelectedNode] = useState(null);
   const [layout, setLayout] = useState('force');
   const canvasRef = useRef(null);
   const [dimensions, setDimensions] = useState({ width: 800, height: 600 });
+  const [showPageRank, setShowPageRank] = useState(false);
 
   useEffect(() => {
     fetchGraphData();
@@ -51,6 +53,24 @@ export default function GraphVisualization({ onClose }) {
       setStats(data);
     } catch (error) {
       console.error('Failed to fetch graph stats:', error);
+    }
+  };
+
+  const fetchPageRank = async () => {
+    try {
+      const response = await fetch('http://localhost:8000/graph/pagerank');
+      const data = await response.json();
+
+      // Convert array to object for quick lookup
+      const pagerankMap = {};
+      data.pagerank.forEach(item => {
+        pagerankMap[item.url] = item.score;
+      });
+
+      setPagerank(pagerankMap);
+      setShowPageRank(true);
+    } catch (error) {
+      console.error('Failed to fetch PageRank:', error);
     }
   };
 
@@ -189,6 +209,9 @@ export default function GraphVisualization({ onClose }) {
               <button onClick={() => setLayout('circular')}>
                 {t('circular_layout', { defaultValue: 'Circular' })}
               </button>
+              <button onClick={fetchPageRank} disabled={showPageRank}>
+                {t('calculate_pagerank', { defaultValue: 'PageRank' })}
+              </button>
               <button onClick={exportAsSVG}>
                 {t('export_svg', { defaultValue: 'Export SVG' })}
               </button>
@@ -203,6 +226,8 @@ export default function GraphVisualization({ onClose }) {
                 onNodeClick={handleNodeClick}
                 getDomainColor={getDomainColor}
                 layout={layout}
+                pagerank={pagerank}
+                showPageRank={showPageRank}
               />
             </div>
           </div>
@@ -213,7 +238,7 @@ export default function GraphVisualization({ onClose }) {
 }
 
 // Simple force-directed graph using SVG (no external dependencies)
-function SimpleForceGraph({ nodes, edges, width, height, onNodeClick, getDomainColor, layout }) {
+function SimpleForceGraph({ nodes, edges, width, height, onNodeClick, getDomainColor, layout, pagerank, showPageRank }) {
   const [positions, setPositions] = useState({});
   const [dragging, setDragging] = useState(null);
 
@@ -353,7 +378,11 @@ function SimpleForceGraph({ nodes, edges, width, height, onNodeClick, getDomainC
         const pos = positions[node.id];
         if (!pos) return null;
 
-        const nodeSize = Math.max(5, Math.min(15, Math.log(node.size + 1) * 2));
+        // Scale node size by PageRank if available
+        let nodeSize = Math.max(5, Math.min(15, Math.log(node.size + 1) * 2));
+        if (showPageRank && pagerank[node.id]) {
+          nodeSize = Math.max(8, Math.min(25, pagerank[node.id] * 200));
+        }
 
         return (
           <g
@@ -368,7 +397,20 @@ function SimpleForceGraph({ nodes, edges, width, height, onNodeClick, getDomainC
               fill={getDomainColor(node.domain)}
               stroke="#fff"
               strokeWidth="2"
+              opacity={showPageRank ? 0.8 : 0.9}
             />
+            {showPageRank && pagerank[node.id] && (
+              <text
+                y="-2"
+                fontSize="9"
+                fill="#fff"
+                fontWeight="bold"
+                textAnchor="middle"
+                pointerEvents="none"
+              >
+                {(pagerank[node.id] * 100).toFixed(1)}
+              </text>
+            )}
             <text
               x={nodeSize + 5}
               y="4"
