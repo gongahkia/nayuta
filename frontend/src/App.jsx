@@ -5,6 +5,7 @@ import ResultsList from './components/ResultsList';
 import Loader from './components/Loader';
 import Footer from './components/Footer';
 import LanguageSwitcher from './components/LanguageSwitcher';
+import GraphVisualization from './components/GraphVisualization';
 import { searchAPI } from './api/search';
 import './styles/main.css';
 
@@ -15,6 +16,7 @@ export default function App() {
   const [error, setError] = useState(null);
   const [currentQuery, setCurrentQuery] = useState('');
   const [explainEnabled, setExplainEnabled] = useState(true);
+  const [showGraph, setShowGraph] = useState(false);
 
   const handleSearch = async (query) => {
     setIsLoading(true);
@@ -53,11 +55,17 @@ export default function App() {
           />
           <span>{t('show_explanations', { defaultValue: 'Show result explanations' })}</span>
         </label>
+
+        <button className="graph-button" onClick={() => setShowGraph(true)}>
+          {t('view_graph', { defaultValue: '🕸️ View Graph' })}
+        </button>
       </div>
 
       {error && <div className="error-message">{error}</div>}
       {isLoading ? <Loader /> : <ResultsList results={results} query={currentQuery} />}
       <Footer />
+
+      {showGraph && <GraphVisualization onClose={() => setShowGraph(false)} />}
     </div>
   );
 }
