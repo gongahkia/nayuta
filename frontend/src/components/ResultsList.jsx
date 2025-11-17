@@ -1,15 +1,57 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { useTranslation } from 'react-i18next';
+import ExplanationModal from './ExplanationModal';
 
-export default function ResultsList({ results }) {
+export default function ResultsList({ results, query }) {
+  const { t } = useTranslation();
+  const [selectedExplanation, setSelectedExplanation] = useState(null);
+
+  const handleExplainClick = (result) => {
+    setSelectedExplanation({
+      explanation: result.explanation,
+      query: query
+    });
+  };
+
+  const closeModal = () => {
+    setSelectedExplanation(null);
+  };
+
   return (
-    <div className="results-container">
-      {results.map((result, index) => (
-        <div key={index} className="result-item">
-          <a href={result.url} className="result-url">{result.url}</a>
-          <h3 className="result-title">{result.title || 'Untitled Document'}</h3>
-          <p className="result-snippet">{result.snippet}</p>
-        </div>
-      ))}
-    </div>
+    <>
+      <div className="results-container">
+        {results.map((result, index) => (
+          <div key={index} className="result-item">
+            <div className="result-header">
+              <a href={result.url} className="result-url">{result.url}</a>
+              {result.explanation && (
+                <button
+                  className="explain-button"
+                  onClick={() => handleExplainClick(result)}
+                  title={t('why_this_result', { defaultValue: 'Why this result?' })}
+                >
+                  {t('why', { defaultValue: 'Why?' })}
+                </button>
+              )}
+            </div>
+            <h3 className="result-title">{result.title || 'Untitled Document'}</h3>
+            <p className="result-snippet">{result.snippet}</p>
+            {result.score && (
+              <div className="result-score">
+                {t('score', { defaultValue: 'Score' })}: {result.score.toFixed(4)}
+              </div>
+            )}
+          </div>
+        ))}
+      </div>
+
+      {selectedExplanation && (
+        <ExplanationModal
+          explanation={selectedExplanation.explanation}
+          query={selectedExplanation.query}
+          onClose={closeModal}
+        />
+      )}
+    </>
   );
 }

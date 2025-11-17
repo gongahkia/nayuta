@@ -31,16 +31,54 @@ body, .app-container {
   padding: 1rem;
   border: 1px solid #eee;
   border-radius: 8px;
+  transition: box-shadow 0.2s;
+}
+
+.result-item:hover {
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.result-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
 }
 
 .result-url {
   color: #006621;
   font-size: 0.9rem;
+  flex: 1;
 }
 
 .result-title {
   margin: 0.5rem 0;
   color: #1a0dab;
+}
+
+.explain-button {
+  background: #1a0dab;
+  color: white;
+  border: none;
+  padding: 6px 14px;
+  border-radius: 16px;
+  font-size: 0.85rem;
+  cursor: pointer;
+  font-weight: bold;
+  transition: all 0.2s;
+  white-space: nowrap;
+}
+
+.explain-button:hover {
+  background: #1508a0;
+  transform: scale(1.05);
+}
+
+.result-score {
+  margin-top: 8px;
+  font-size: 0.85rem;
+  color: #666;
+  font-family: monospace;
 }
 
 .loader {
