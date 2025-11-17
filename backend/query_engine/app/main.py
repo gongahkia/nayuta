@@ -1,10 +1,11 @@
 import time
 from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
-from typing import List, Optional
+from typing import List, Optional, Dict, Any
 from pydantic import BaseModel
 from backend.config import config
-from .ranking import BM25Ranker 
+from .ranking import BM25Ranker
+from backend.services.graph_service import CrawlGraphService 
 
 app = FastAPI(
     title="Nayuta Query Engine",
@@ -24,8 +25,9 @@ app.add_middleware(
 
 try:
     ranker = BM25Ranker(index_path="../indexer/whoosh_index")
+    graph_service = CrawlGraphService(ranker.index)
 except Exception as e:
-    raise RuntimeError(f"Failed to initialize ranker: {str(e)}")
+    raise RuntimeError(f"Failed to initialize services: {str(e)}")
 
 class SearchResult(BaseModel):
     url: str
@@ -84,6 +86,48 @@ async def health_check():
         "index_size": ranker.index_size(),
         "version": "0.1.0"
     }
+
+@app.get("/graph", tags=["Graph"])
+async def get_graph_data():
+    """Get web graph data for visualization"""
+    try:
+        graph_data = graph_service.build_graph()
+        return graph_data
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
+
+@app.get("/graph/pagerank", tags=["Graph"])
+async def get_pagerank(iterations: int = 20):
+    """Calculate PageRank for all documents"""
+    try:
+        pagerank = graph_service.calculate_pagerank(iterations=iterations)
+        # Return sorted by score
+        sorted_pagerank = sorted(
+            [{"url": url, "score": score} for url, score in pagerank.items()],
+            key=lambda x: x["score"],
+            reverse=True
+        )
+        return {"pagerank": sorted_pagerank}
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
+
+@app.get("/graph/stats", tags=["Graph"])
+async def get_graph_stats():
+    """Get comprehensive graph statistics"""
+    try:
+        stats = graph_service.get_graph_statistics()
+        return stats
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
+
+@app.get("/graph/domains", tags=["Graph"])
+async def get_domain_clusters():
+    """Get documents grouped by domain"""
+    try:
+        clusters = graph_service.get_domain_clusters()
+        return {"clusters": clusters}
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
 
 @app.websocket("/ws/search")
 async def websocket_search(websocket: WebSocket):
