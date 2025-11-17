@@ -70,8 +70,8 @@
   display: flex;
   gap: 16px;
   padding: 16px;
-  background: #666;
-  color: white;
+  background: white;
+  color: #333;
   border-bottom: 1px solid #e0e0e0;
 }
 
@@ -85,12 +85,13 @@
   font-size: 24px;
   font-weight: bold;
   margin-bottom: 4px;
+  color: #000;
 }
 
 .stat-label {
   display: block;
   font-size: 12px;
-  opacity: 0.9;
+  color: #666;
 }
 
 .history-filter {
